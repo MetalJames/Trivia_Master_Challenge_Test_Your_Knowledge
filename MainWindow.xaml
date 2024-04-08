@@ -1,0 +1,52 @@
+﻿<Window x:Class="Trivia_Master_Challenge_Test_Your_Knowledge_.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Trivia_Master_Challenge_Test_Your_Knowledge_"
+        mc:Ignorable="d"
+              Title="Two Player Trivia Game" Height="450" Width="800">
+    <Border BorderThickness="10" BorderBrush="MidnightBlue">
+        <Border BorderThickness="7" BorderBrush="LightBlue">
+            <Border BorderThickness="5" BorderBrush="SkyBlue">
+                <Grid>
+                    <!-- Background Image -->
+                    <Grid.Background>
+                        <ImageBrush ImageSource="images/main_screen.jpeg" Opacity="0.3" Stretch="UniformToFill"/>
+                    </Grid.Background>
+                    <!-- Title -->
+                    <TextBlock Text="TRIVIA QUIZ GAME" Foreground="MidnightBlue" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="42" FontWeight="Bold" Margin="0,75,0,0"/>
+
+                    <!-- Player Names and Multiplayer Checkbox -->
+                    <Grid Margin="0,165,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Background="Azure" Opacity="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Player 1 Name -->
+                        <StackPanel Grid.Column="1" Margin="10,10,20,10" HorizontalAlignment="Center">
+                            <TextBlock Text="Player 1 Name:" VerticalAlignment="Center" FontWeight="Bold"/>
+                            <TextBox x:Name="Player1Name" Text="Player 1" Margin="0,5" Width="100" HorizontalAlignment="Center"/>
+                        </StackPanel>
+
+                        <!-- Multiplayer Checkbox -->
+                        <CheckBox Grid.Column="2" Margin="0,50,0,10" Content="Multiplayer" Name="MultiplayerCheckBox" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                        <!-- Player 2 Name -->
+                        <StackPanel Grid.Column="3" Margin="20,10,10,10" HorizontalAlignment="Center">
+                            <TextBlock Text="Player 2 Name:" VerticalAlignment="Center" FontWeight="Bold"/>
+                            <TextBox x:Name="Player2Name" Text="Player 2" Margin="0,5" Width="100" HorizontalAlignment="Center" IsEnabled="False"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- Start Button -->
+                    <Button Content="Start the Game" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" Margin="0,0,0,70" Padding="10" Click="Start_Click" Background="LightBlue"/>
+
+                </Grid>
+            </Border>
+        </Border>
+    </Border>
+</Window>
