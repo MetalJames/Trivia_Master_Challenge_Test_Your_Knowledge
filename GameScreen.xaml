@@ -34,7 +34,7 @@
                             </LinearGradientBrush>
                         </Border.Background>
                         <StackPanel>
-                            <TextBlock Text="Player 1" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18" Margin="0,20,0,0"/>
+                            <TextBlock x:Name="Player1NameLabel" Text="Player 1" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18" Margin="0,20,0,0"/>
                             <TextBlock Text="Question:" FontWeight="Bold" Margin="10,20,10,0"/>
                             <TextBlock x:Name="Player1Question" Text="Question 1" Margin="10,10,10,20"/>
                             <RadioButton x:Name="Player1AnswerA" Content="Answer A" Margin="10,5"/>
@@ -64,7 +64,7 @@
                             </LinearGradientBrush>
                         </Border.Background>
                         <StackPanel>
-                            <TextBlock Text="Player 2" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18" Margin="0,20,0,0"/>
+                            <TextBlock x:Name="Player2NameLabel" Text="Player 2" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18" Margin="0,20,0,0"/>
                             <TextBlock Text="Question:" FontWeight="Bold" Margin="10,20,10,0"/>
                             <TextBlock x:Name="Player2Question" Text="Question 1" Margin="10,10,10,20"/>
                             <RadioButton x:Name="Player2AnswerA" Content="Answer A" Margin="10,5"/>

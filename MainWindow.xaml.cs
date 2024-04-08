@@ -23,17 +23,28 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
-            string player1Name = Player1Name.Text;
-            string player2Name = Player2Name.Text;
+            // Get player names
+            string player1Name = string.IsNullOrEmpty(Player1Name.Text) ? "Player One" : Player1Name.Text;
+            string player2Name = string.IsNullOrEmpty(Player2Name.Text) ? "Player Two" : Player2Name.Text;
 
-            if (string.IsNullOrWhiteSpace(player1Name))
-                player1Name = "Player One";
-            if (string.IsNullOrWhiteSpace(player2Name))
-                player2Name = "Player Two";
-
-/*            GameScreen gameScreen = new GameScreen(player1Name, player2Name, MultiplayerCheckBox.IsChecked ?? false);
+            // Navigate to GameScreen with player names
+            GameScreen gameScreen = new GameScreen(player1Name, player2Name);
             gameScreen.Show();
-            this.Close();*/
+
+            // Close current window
+            this.Close();
+        }
+
+        private void MultiplayerCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            // Enable Player 2 name textbox when Multiplayer checkbox is checked
+            Player2Name.IsEnabled = true;
+        }
+
+        private void MultiplayerCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            // Disable Player 2 name textbox when Multiplayer checkbox is unchecked
+            Player2Name.IsEnabled = false;
         }
     }
 }

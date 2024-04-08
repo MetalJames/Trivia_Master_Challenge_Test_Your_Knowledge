@@ -33,7 +33,8 @@
                         </StackPanel>
 
                         <!-- Multiplayer Checkbox -->
-                        <CheckBox Grid.Column="2" Margin="0,50,0,10" Content="Multiplayer" Name="MultiplayerCheckBox" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <CheckBox Grid.Column="2" Margin="0,50,0,10" Content="Multiplayer" Name="MultiplayerCheckBox" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                  Checked="MultiplayerCheckBox_Checked" Unchecked="MultiplayerCheckBox_Unchecked"/>
 
                         <!-- Player 2 Name -->
                         <StackPanel Grid.Column="3" Margin="20,10,10,10" HorizontalAlignment="Center">

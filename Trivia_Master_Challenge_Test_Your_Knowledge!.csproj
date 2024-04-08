@@ -9,4 +9,16 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="images\game_screen.jpeg" />
+    <None Remove="images\main_screen.jpeg" />
+    <None Remove="images\winner_screen.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="images\game_screen.jpeg" />
+    <Resource Include="images\main_screen.jpeg" />
+    <Resource Include="images\winner_screen.jpeg" />
+  </ItemGroup>
+
 </Project>

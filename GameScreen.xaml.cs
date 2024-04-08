@@ -19,9 +19,21 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
     /// </summary>
     public partial class GameScreen : Window
     {
-        public GameScreen()
+        // Variables to store player names
+        private string player1Name;
+        private string player2Name;
+
+        public GameScreen(string player1Name, string player2Name)
         {
             InitializeComponent();
+
+            // Store player names
+            this.player1Name = player1Name;
+            this.player2Name = player2Name;
+
+            // Update UI part with player names
+            Player1NameLabel.Text = player1Name;
+            Player2NameLabel.Text = player2Name;
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)
