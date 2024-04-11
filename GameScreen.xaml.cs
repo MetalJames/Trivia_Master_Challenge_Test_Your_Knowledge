@@ -20,16 +20,16 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
     public partial class GameScreen : Window
     {
         // Variables to store player names
-        private string player1Name;
-        private string player2Name;
+        private string playerOneName;
+        private string playerTwoName;
 
         public GameScreen(string player1Name, string player2Name)
         {
             InitializeComponent();
 
             // Store player names
-            this.player1Name = player1Name;
-            this.player2Name = player2Name;
+            this.playerOneName = player1Name;
+            this.playerTwoName = player2Name;
 
             // Update UI part with player names
             Player1NameLabel.Text = player1Name;
@@ -39,7 +39,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
             // Your submit button logic goes here
-            Console.WriteLine("Test");
+            MessageBox.Show("Test");
         }
     }
 }

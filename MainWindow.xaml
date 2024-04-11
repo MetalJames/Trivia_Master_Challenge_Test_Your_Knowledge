@@ -14,6 +14,11 @@
                     <Grid.Background>
                         <ImageBrush ImageSource="images/main_screen.jpeg" Opacity="0.3" Stretch="UniformToFill"/>
                     </Grid.Background>
+
+                    <!-- Admin Button -->
+                    <Button Content="Manage Questions" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" Margin="570,0,0,330" Padding="10" Click="Manage_Questions" Background="LightBlue"/>
+
+
                     <!-- Title -->
                     <TextBlock Text="TRIVIA QUIZ GAME" Foreground="MidnightBlue" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="42" FontWeight="Bold" Margin="0,75,0,0"/>
 

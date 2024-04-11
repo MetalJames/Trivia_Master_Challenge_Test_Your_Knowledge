@@ -35,6 +35,17 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             this.Close();
         }
 
+        private void Manage_Questions(object sender, RoutedEventArgs e)
+        {
+
+            // Navigate to Window1 with player names
+            Window1 adminScreen = new Window1();
+            adminScreen.Show();
+
+            // Close current window
+            this.Close();
+        }
+
         private void MultiplayerCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             // Enable Player 2 name textbox when Multiplayer checkbox is checked
