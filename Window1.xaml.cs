@@ -41,19 +41,29 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
 
         private void Create(object sender, RoutedEventArgs e)
         {
+            // Get input values from text boxes
+            int questionID = int.Parse(newQuestionIDTextBox.Text);
+            string question = newQuestionTextBox.Text;
+            string answerOne = newAnswerOneTextBox.Text;
+            string answerTwo = newAnswerTwoTextBox.Text;
+            string answerThree = newAnswerThreeTextBox.Text;
+            string answerFour = newAnswerFourTextBox.Text;
+            string correctAnswer = newCorrectAnswerTextBox.Text;
 
+            // SQL command to insert values into the database
+            string command = $"INSERT INTO TriviaDB.dbo.Trivia_Table (QuestionID, Question, AnswerOne, AnswerTwo, AnswerThree, AnswerFour, CorrectAnswer) " +
+                             $"VALUES ({questionID}, '{question}', '{answerOne}', '{answerTwo}', '{answerThree}', '{answerFour}', '{correctAnswer}')";
 
-            string command = "INSERT INTO TriviaDB.dbo.Trivia_Table(QuestionID, Question, AnswerOne, AnswerTwo, AnswerThree, AnswerFour, CorrectAnswer) " +
-                "VALUES(125, 'John', 'Smitrh', '28', 'male', 'false', 'LOL')";
+            // Execute SQL command
             SqlCommand cmd = new SqlCommand(command, con);
-            DataTable dt = new DataTable();
             con.Open();
-            SqlDataReader sdr = cmd.ExecuteReader();
-            dt.Load(sdr);
+            cmd.ExecuteNonQuery();
             con.Close();
-            datagrid.ItemsSource = dt.DefaultView;
+
+            // Refresh the data grid
             Read(sender, e);
         }
+
 
         private void Update(object sender, RoutedEventArgs e)
         {
@@ -70,14 +80,25 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
 
         private void Delete(object sender, RoutedEventArgs e)
         {
-            string command = "DELETE FROM TriviaDB.dbo.Trivia_Table  WHERE QuestionID=125";
-            SqlCommand cmd = new SqlCommand(command, con);
-            DataTable dt = new DataTable();
+            // Get the selected questions from the datagrid
+            var selectedQuestions = datagrid.SelectedItems.Cast<DataRowView>()
+                                    .Select(rowView => (int)rowView["QuestionID"]).ToList();
+
+            // Open the database connection
             con.Open();
-            SqlDataReader sdr = cmd.ExecuteReader();
-            dt.Load(sdr);
+
+            // Delete each selected question from the database
+            foreach (int questionID in selectedQuestions)
+            {
+                string command = $"DELETE FROM TriviaDB.dbo.Trivia_Table WHERE QuestionID = {questionID}";
+                SqlCommand cmd = new SqlCommand(command, con);
+                cmd.ExecuteNonQuery();
+            }
+
+            // Close the database connection
             con.Close();
-            datagrid.ItemsSource = dt.DefaultView;
+
+            // Refresh the datagrid to reflect the changes
             Read(sender, e);
         }
     }

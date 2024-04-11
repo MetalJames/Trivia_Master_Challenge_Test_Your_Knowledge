@@ -5,13 +5,110 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Trivia_Master_Challenge_Test_Your_Knowledge_"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
-    <Grid>
-        <DataGrid x:Name="datagrid" Margin="428,10,10,88"/>
-        <Button Content="Read" HorizontalAlignment="Left" Margin="114,121,0,0" VerticalAlignment="Top" Click="Read" Height="21" Width="77"/>
-        <Button Content="Create" HorizontalAlignment="Left" Margin="116,90,0,0" VerticalAlignment="Top" Width="72" Click="Create"/>
-        <Button Content="Update" HorizontalAlignment="Left" Margin="116,160,0,0" VerticalAlignment="Top" Width="72" Click="Update"/>
-        <Button Content="Delete" HorizontalAlignment="Left" Margin="116,185,0,0" VerticalAlignment="Top" Width="72" Click="Delete"/>
+        Title="Manage Questions" Height="450" Width="800">
+    <Border BorderThickness="10" BorderBrush="MidnightBlue">
+        <Border BorderThickness="7" BorderBrush="LightBlue">
+            <Border BorderThickness="5" BorderBrush="SkyBlue">
+                <Grid>
+                    <!-- Background Image -->
+                    <Grid.Background>
+                        <ImageBrush ImageSource="images/main_screen.jpeg" Opacity="0.1" Stretch="UniformToFill"/>
+                    </Grid.Background>
 
-    </Grid>
+                    <Grid.RowDefinitions>
+                        <!-- First row takes 75% of the height -->
+                        <RowDefinition Height="3*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- CRUD Operations Section -->
+                    <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1" Margin="10">
+                        <StackPanel>
+                            <TextBlock Text="Operations" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="10"/>
+                            <Button Content="Create" Margin="10" Click="Create"/>
+                            <Button Content="Read" Margin="10" Click="Read"/>
+                            <Button Content="Update" Margin="10" Click="Update"/>
+                            <Button Content="Delete" Margin="10" Click="Delete"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Middle Separator -->
+                    <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="1"/>
+                    <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1"/>
+
+                    <!-- Questions List Section -->
+                    <Border Grid.Row="0" Grid.Column="2" BorderBrush="Black" BorderThickness="1" Margin="10">
+                        <StackPanel>
+                            <TextBlock Text="Existing Questions" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="10"/>
+                            <DataGrid x:Name="datagrid" Margin="10" Height="200" CanUserAddRows="False" />
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Content for the second row -->
+                    <!-- Container for editing or adding new questions -->
+                    <Grid Grid.Row="1" Grid.ColumnSpan="3">
+                        <!-- Split the row into two columns -->
+                        <Grid.ColumnDefinitions>
+                            <!-- First column takes Auto width -->
+                            <ColumnDefinition Width="1*" />
+                            <!-- Second column takes the remaining width -->
+                            <ColumnDefinition Width="3*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Container for the "Create" button -->
+                        <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1" Margin="10">
+                            <!-- Place the "Create" button in this container -->
+                            <Button Content="Create" Margin="10" Click="Create"/>
+                        </Border>
+
+                        <!-- Container for the TextField (TextBox) -->
+                        <ScrollViewer Grid.Column="1" BorderBrush="Black" BorderThickness="1" Margin="10" HorizontalScrollBarVisibility="Auto">
+                        <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1" Margin="10">
+                            <Grid>
+                                <!-- Define two rows for the Grid -->
+                                <Grid.RowDefinitions>
+                                    <!-- First row for headers -->
+                                    <RowDefinition Height="Auto" />
+                                    <!-- Second row for TextBoxes -->
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <!-- Headers for each field -->
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <TextBlock Text="QuestionID" Margin="5"/>
+                                    <TextBlock Text="Question" Margin="5"/>
+                                    <TextBlock Text="AnswerOne" Margin="5"/>
+                                    <TextBlock Text="AnswerTwo" Margin="5"/>
+                                    <TextBlock Text="AnswerThree" Margin="5"/>
+                                    <TextBlock Text="AnswerFour" Margin="5"/>
+                                    <TextBlock Text="Correct answer" Margin="5"/>
+                                    <TextBlock Text="DeleteQuestion" Margin="5"/>
+                                </StackPanel>
+
+                                <!-- TextBoxes for each field -->
+                                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                    <!-- TextBoxes with corresponding bindings -->
+                                    <TextBox x:Name="newQuestionIDTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="200"/>
+                                    <TextBox x:Name="newQuestionTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="200"/>
+                                    <TextBox x:Name="newAnswerOneTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="200"/>
+                                    <TextBox x:Name="newAnswerTwoTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="200"/>
+                                    <TextBox x:Name="newAnswerThreeTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="200"/>
+                                    <TextBox x:Name="newAnswerFourTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="200"/>
+                                    <TextBox x:Name="newCorrectAnswerTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="200"/>
+                                    <CheckBox x:Name="newDeleteQuestionCheckBox" Margin="5" IsEnabled="False"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Border>
+    </Border>
 </Window>
