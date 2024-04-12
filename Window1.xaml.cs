@@ -41,8 +41,86 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
 
         private void Create(object sender, RoutedEventArgs e)
         {
-            // Get input values from text boxes
-            int questionID = int.Parse(newQuestionIDTextBox.Text);
+            try
+            {
+                // Get input values from text boxes
+                int questionID = int.Parse(newQuestionIDTextBox.Text);
+                string question = newQuestionTextBox.Text;
+                string answerOne = newAnswerOneTextBox.Text;
+                string answerTwo = newAnswerTwoTextBox.Text;
+                string answerThree = newAnswerThreeTextBox.Text;
+                string answerFour = newAnswerFourTextBox.Text;
+                string correctAnswer = newCorrectAnswerTextBox.Text;
+                char deleteQuestion = '0';
+
+                // SQL command to insert values into the database
+                string command = $"INSERT INTO TriviaDB.dbo.Trivia_Table (QuestionID, Question, AnswerOne, AnswerTwo, AnswerThree, AnswerFour, CorrectAnswer, DeleteQuestion) " +
+                                 $"VALUES ({questionID}, '{question}', '{answerOne}', '{answerTwo}', '{answerThree}', '{answerFour}', '{correctAnswer}', '{deleteQuestion}')";
+
+                // Execute SQL command
+                SqlCommand cmd = new SqlCommand(command, con);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+                // Reset the text fields
+                newQuestionIDTextBox.Text = "";
+                newQuestionTextBox.Text = "";
+                newAnswerOneTextBox.Text = "";
+                newAnswerTwoTextBox.Text = "";
+                newAnswerThreeTextBox.Text = "";
+                newAnswerFourTextBox.Text = "";
+                newCorrectAnswerTextBox.Text = "";
+
+                // Refresh the data grid
+                Read(sender, e);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
+        }
+
+        private void SelectToUpdate(object sender, RoutedEventArgs e)
+        {
+            // Ensure that there is at least one selected question
+            if (datagrid.SelectedItems.Count > 0)
+            {
+                // Get the selected question from the datagrid
+                DataRowView selectedQuestion = (DataRowView)datagrid.SelectedItem;
+
+                // Populate the text fields with the content of the selected question
+                newQuestionIDTextBox.Text = selectedQuestion["QuestionID"].ToString();
+                newQuestionTextBox.Text = selectedQuestion["Question"].ToString();
+                newAnswerOneTextBox.Text = selectedQuestion["AnswerOne"].ToString();
+                newAnswerTwoTextBox.Text = selectedQuestion["AnswerTwo"].ToString();
+                newAnswerThreeTextBox.Text = selectedQuestion["AnswerThree"].ToString();
+                newAnswerFourTextBox.Text = selectedQuestion["AnswerFour"].ToString();
+                newCorrectAnswerTextBox.Text = selectedQuestion["CorrectAnswer"].ToString();
+
+                newQuestionIDTextBox.IsEnabled = false;
+
+                // Disable and hide the "Add New Question" button
+                createButton.IsEnabled = false;
+                createButton.Opacity = 0;
+                createButtonContainer.SetValue(Panel.ZIndexProperty, 0);
+
+                // Enable and show the "Update" button
+                updateButton.IsEnabled = true;
+                updateButton.Opacity = 100;
+                updateButtonContainer.SetValue(Panel.ZIndexProperty, 1);
+
+            }
+            else
+            {
+                MessageBox.Show("Please select a question to update.");
+            }
+        }
+
+        private void Update(object sender, RoutedEventArgs e)
+        {
+            // Get the updated values from the text fields
+            int questionID = int.Parse(newQuestionIDTextBox.Text); // ID remains the same
             string question = newQuestionTextBox.Text;
             string answerOne = newAnswerOneTextBox.Text;
             string answerTwo = newAnswerTwoTextBox.Text;
@@ -50,31 +128,44 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             string answerFour = newAnswerFourTextBox.Text;
             string correctAnswer = newCorrectAnswerTextBox.Text;
 
-            // SQL command to insert values into the database
-            string command = $"INSERT INTO TriviaDB.dbo.Trivia_Table (QuestionID, Question, AnswerOne, AnswerTwo, AnswerThree, AnswerFour, CorrectAnswer) " +
-                             $"VALUES ({questionID}, '{question}', '{answerOne}', '{answerTwo}', '{answerThree}', '{answerFour}', '{correctAnswer}')";
+            // Construct the SQL command to update the question in the database
+            string command = $"UPDATE TriviaDB.dbo.Trivia_Table " +
+                             $"SET Question = '{question}', " +
+                             $"AnswerOne = '{answerOne}', " +
+                             $"AnswerTwo = '{answerTwo}', " +
+                             $"AnswerThree = '{answerThree}', " +
+                             $"AnswerFour = '{answerFour}', " +
+                             $"CorrectAnswer = '{correctAnswer}' " +
+                             $"WHERE QuestionID = {questionID}";
 
-            // Execute SQL command
+            // Execute the SQL command
             SqlCommand cmd = new SqlCommand(command, con);
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
 
-            // Refresh the data grid
-            Read(sender, e);
-        }
+            // Reset the text fields
+            newQuestionIDTextBox.Text = "";
+            newQuestionTextBox.Text = "";
+            newAnswerOneTextBox.Text = "";
+            newAnswerTwoTextBox.Text = "";
+            newAnswerThreeTextBox.Text = "";
+            newAnswerFourTextBox.Text = "";
+            newCorrectAnswerTextBox.Text = "";
 
+            newQuestionIDTextBox.IsEnabled = true;
 
-        private void Update(object sender, RoutedEventArgs e)
-        {
-            string command = "UPDATE TriviaDB.dbo.Trivia_Table SET Question = 'MoinCruft' WHERE QuestionID = 001";
-            SqlCommand cmd = new SqlCommand(command, con);
-            DataTable dt = new DataTable();
-            con.Open();
-            SqlDataReader sdr = cmd.ExecuteReader();
-            dt.Load(sdr);
-            con.Close();
-            datagrid.ItemsSource = dt.DefaultView;
+            // Disable and hide the "Add New Question" button
+            createButton.IsEnabled = true;
+            createButton.Opacity = 100;
+            createButtonContainer.SetValue(Panel.ZIndexProperty, 1);
+
+            // Enable and show the "Update" button
+            updateButton.IsEnabled = false;
+            updateButton.Opacity = 0;
+            updateButtonContainer.SetValue(Panel.ZIndexProperty, 0);
+
+            // Refresh the datagrid to reflect the changes
             Read(sender, e);
         }
 

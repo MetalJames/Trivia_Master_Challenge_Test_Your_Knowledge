@@ -32,7 +32,7 @@
                         <StackPanel>
                             <TextBlock Text="Operations" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="10"/>
                             <Button Content="Get Questions" Margin="10" Click="Read"/>
-                            <Button Content="Update Question" Margin="10" Click="Update"/>
+                            <Button Content="Update Question" Margin="10" Click="SelectToUpdate"/>
                             <Button Content="Delete Question" Margin="10" Click="Delete"/>
                         </StackPanel>
                     </Border>
@@ -45,7 +45,7 @@
                     <Border Grid.Row="0" Grid.Column="2" BorderBrush="Black" BorderThickness="1" Margin="10">
                         <StackPanel>
                             <TextBlock Text="Existing Questions" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="10"/>
-                            <DataGrid x:Name="datagrid" Margin="10" Height="200" CanUserAddRows="False" />
+                            <DataGrid x:Name="datagrid" Margin="10" Height="170" CanUserAddRows="False" />
                         </StackPanel>
                     </Border>
 
@@ -61,14 +61,20 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- Container for the "Create" button -->
-                        <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1" Margin="10">
+                        <Border x:Name="createButtonContainer" Grid.Column="0" BorderBrush="Black" BorderThickness="1" Margin="10" Panel.ZIndex="100">
                             <!-- Place the "Create" button in this container -->
-                            <Button Content="Add New Question" Margin="10" Click="Create" Height="25"/>
+                            <Button x:Name="createButton" Content="Add New Question" Margin="10" Click="Create" Height="25" IsEnabled="True" Opacity="100"/>
+                        </Border>
+                        <!-- Container for the "Create" button -->
+                        <Border x:Name="updateButtonContainer" Grid.Column="0" BorderBrush="Black" BorderThickness="1" Margin="10" Panel.ZIndex="0">
+                            <!-- Place the "Update" button in this container -->
+                            <Button x:Name="updateButton" Content="Update" Margin="10" Click="Update" Height="25" IsEnabled="False" Opacity="0"/>
                         </Border>
 
+
                         <!-- Container for the TextField (TextBox) -->
-                        <ScrollViewer Grid.Column="1" BorderBrush="Black" BorderThickness="1" Margin="10" HorizontalScrollBarVisibility="Auto">
                         <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1" Margin="10">
+                        <ScrollViewer Grid.Column="1" BorderBrush="Black" BorderThickness="1" Margin="10" HorizontalScrollBarVisibility="Auto">
                             <Grid>
                                 <!-- Define two rows for the Grid -->
                                 <Grid.RowDefinitions>
@@ -87,24 +93,24 @@
                                     <TextBlock Text="AnswerThree" Margin="5" Width="100"/>
                                     <TextBlock Text="AnswerFour" Margin="5" Width="100"/>
                                     <TextBlock Text="Correct answer" Margin="5" Width="100"/>
-                                    <TextBlock Text="DeleteQuestion" Margin="5" Width="100"/>
+
                                 </StackPanel>
 
                                 <!-- TextBoxes for each field -->
                                 <StackPanel Grid.Row="1" Orientation="Horizontal">
                                     <!-- TextBoxes with corresponding bindings -->
-                                    <TextBox x:Name="newQuestionIDTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="60"/>
+                                    <TextBox x:Name="newQuestionIDTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="60" IsEnabled="True"/>
                                     <TextBox x:Name="newQuestionTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="200"/>
                                     <TextBox x:Name="newAnswerOneTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="100"/>
                                     <TextBox x:Name="newAnswerTwoTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="100"/>
                                     <TextBox x:Name="newAnswerThreeTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="100"/>
                                     <TextBox x:Name="newAnswerFourTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="100"/>
                                     <TextBox x:Name="newCorrectAnswerTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="100"/>
-                                    <CheckBox x:Name="newDeleteQuestionCheckBox" Margin="5" IsEnabled="False"/>
+
                                 </StackPanel>
                             </Grid>
-                        </Border>
                         </ScrollViewer>
+                        </Border>
                     </Grid>
                 </Grid>
             </Border>
