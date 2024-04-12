@@ -57,7 +57,18 @@
                                 <RowDefinition Height="8*"/>
                             </Grid.RowDefinitions>
                             <TextBlock Text="Existing Questions" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="10" Grid.Row="0"/>
-                            <DataGrid x:Name="datagrid" Margin="10" Height="170" CanUserAddRows="False" Grid.Row="1"/>
+                            <DataGrid x:Name="datagrid" Margin="10" Height="170" CanUserAddRows="False" Grid.Row="1" AutoGenerateColumns="False" Opacity="0">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="QuestionID" Binding="{Binding QuestionID}" />
+                                    <DataGridTextColumn Header="Question" Binding="{Binding Question}" />
+                                    <DataGridTextColumn Header="Answer One" Binding="{Binding AnswerOne}" />
+                                    <DataGridTextColumn Header="Answer Two" Binding="{Binding AnswerTwo}" />
+                                    <DataGridTextColumn Header="Answer Three" Binding="{Binding AnswerThree}" />
+                                    <DataGridTextColumn Header="Answer Four" Binding="{Binding AnswerFour}" />
+                                    <DataGridTextColumn Header="Correct Answer" Binding="{Binding CorrectAnswer}" />
+                                    <DataGridCheckBoxColumn Header="Delete Question" Binding="{Binding DeleteQuestion}" />
+                                </DataGrid.Columns>
+                            </DataGrid>
                         </Grid>
                     </Border>
 

@@ -37,6 +37,8 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             dt.Load(sdr);
             con.Close();
             datagrid.ItemsSource = dt.DefaultView;
+
+            datagrid.Opacity = 1;
         }
 
         private void Create(object sender, RoutedEventArgs e)
@@ -180,6 +182,19 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
         {
             try
             {
+                // Check if there are any questions in the datagrid
+                if (datagrid.Items.Count == 0)
+                {
+                    MessageBox.Show("There are no questions to delete.");
+                    return;
+                }
+
+                // Check if any question is selected
+                if (datagrid.SelectedItems.Count == 0)
+                {
+                    MessageBox.Show("Please select a question to delete.");
+                    return;
+                }
                 // Get the selected questions from the datagrid
                 var selectedQuestions = datagrid.SelectedItems.Cast<DataRowView>()
                                         .Select(rowView => (int)rowView["QuestionID"]).ToList();
