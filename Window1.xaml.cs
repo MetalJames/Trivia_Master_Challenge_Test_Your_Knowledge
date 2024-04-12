@@ -119,78 +119,101 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
 
         private void Update(object sender, RoutedEventArgs e)
         {
-            // Get the updated values from the text fields
-            int questionID = int.Parse(newQuestionIDTextBox.Text); // ID remains the same
-            string question = newQuestionTextBox.Text;
-            string answerOne = newAnswerOneTextBox.Text;
-            string answerTwo = newAnswerTwoTextBox.Text;
-            string answerThree = newAnswerThreeTextBox.Text;
-            string answerFour = newAnswerFourTextBox.Text;
-            string correctAnswer = newCorrectAnswerTextBox.Text;
+            try
+            {
+                // Get the updated values from the text fields
+                int questionID = int.Parse(newQuestionIDTextBox.Text); // ID remains the same
+                string question = newQuestionTextBox.Text;
+                string answerOne = newAnswerOneTextBox.Text;
+                string answerTwo = newAnswerTwoTextBox.Text;
+                string answerThree = newAnswerThreeTextBox.Text;
+                string answerFour = newAnswerFourTextBox.Text;
+                string correctAnswer = newCorrectAnswerTextBox.Text;
 
-            // Construct the SQL command to update the question in the database
-            string command = $"UPDATE TriviaDB.dbo.Trivia_Table " +
-                             $"SET Question = '{question}', " +
-                             $"AnswerOne = '{answerOne}', " +
-                             $"AnswerTwo = '{answerTwo}', " +
-                             $"AnswerThree = '{answerThree}', " +
-                             $"AnswerFour = '{answerFour}', " +
-                             $"CorrectAnswer = '{correctAnswer}' " +
-                             $"WHERE QuestionID = {questionID}";
+                // Construct the SQL command to update the question in the database
+                string command = $"UPDATE TriviaDB.dbo.Trivia_Table " +
+                                 $"SET Question = '{question}', " +
+                                 $"AnswerOne = '{answerOne}', " +
+                                 $"AnswerTwo = '{answerTwo}', " +
+                                 $"AnswerThree = '{answerThree}', " +
+                                 $"AnswerFour = '{answerFour}', " +
+                                 $"CorrectAnswer = '{correctAnswer}' " +
+                                 $"WHERE QuestionID = {questionID}";
 
-            // Execute the SQL command
-            SqlCommand cmd = new SqlCommand(command, con);
-            con.Open();
-            cmd.ExecuteNonQuery();
-            con.Close();
+                // Execute the SQL command
+                SqlCommand cmd = new SqlCommand(command, con);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
 
-            // Reset the text fields
-            newQuestionIDTextBox.Text = "";
-            newQuestionTextBox.Text = "";
-            newAnswerOneTextBox.Text = "";
-            newAnswerTwoTextBox.Text = "";
-            newAnswerThreeTextBox.Text = "";
-            newAnswerFourTextBox.Text = "";
-            newCorrectAnswerTextBox.Text = "";
+                // Reset the text fields
+                newQuestionIDTextBox.Text = "";
+                newQuestionTextBox.Text = "";
+                newAnswerOneTextBox.Text = "";
+                newAnswerTwoTextBox.Text = "";
+                newAnswerThreeTextBox.Text = "";
+                newAnswerFourTextBox.Text = "";
+                newCorrectAnswerTextBox.Text = "";
 
-            newQuestionIDTextBox.IsEnabled = true;
+                newQuestionIDTextBox.IsEnabled = true;
 
-            // Disable and hide the "Add New Question" button
-            createButton.IsEnabled = true;
-            createButton.Opacity = 100;
-            createButtonContainer.SetValue(Panel.ZIndexProperty, 1);
+                // Disable and hide the "Add New Question" button
+                createButton.IsEnabled = true;
+                createButton.Opacity = 100;
+                createButtonContainer.SetValue(Panel.ZIndexProperty, 1);
 
-            // Enable and show the "Update" button
-            updateButton.IsEnabled = false;
-            updateButton.Opacity = 0;
-            updateButtonContainer.SetValue(Panel.ZIndexProperty, 0);
+                // Enable and show the "Update" button
+                updateButton.IsEnabled = false;
+                updateButton.Opacity = 0;
+                updateButtonContainer.SetValue(Panel.ZIndexProperty, 0);
 
-            // Refresh the datagrid to reflect the changes
-            Read(sender, e);
+                // Refresh the datagrid to reflect the changes
+                Read(sender, e);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
         }
 
         private void Delete(object sender, RoutedEventArgs e)
         {
-            // Get the selected questions from the datagrid
-            var selectedQuestions = datagrid.SelectedItems.Cast<DataRowView>()
-                                    .Select(rowView => (int)rowView["QuestionID"]).ToList();
-
-            // Open the database connection
-            con.Open();
-
-            // Delete each selected question from the database
-            foreach (int questionID in selectedQuestions)
+            try
             {
-                string command = $"DELETE FROM TriviaDB.dbo.Trivia_Table WHERE QuestionID = {questionID}";
-                SqlCommand cmd = new SqlCommand(command, con);
-                cmd.ExecuteNonQuery();
+                // Get the selected questions from the datagrid
+                var selectedQuestions = datagrid.SelectedItems.Cast<DataRowView>()
+                                        .Select(rowView => (int)rowView["QuestionID"]).ToList();
+
+                // Open the database connection
+                con.Open();
+
+                // Delete each selected question from the database
+                foreach (int questionID in selectedQuestions)
+                {
+                    string command = $"DELETE FROM TriviaDB.dbo.Trivia_Table WHERE QuestionID = {questionID}";
+                    SqlCommand cmd = new SqlCommand(command, con);
+                    cmd.ExecuteNonQuery();
+                }
+
+                // Close the database connection
+                con.Close();
+
+                // Refresh the datagrid to reflect the changes
+                Read(sender, e);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
+        }
 
-            // Close the database connection
-            con.Close();
+        private void ReturnToMainScreen(object sender, RoutedEventArgs e)
+        {
+            // Navigate to MainScreen with player names
+            MainWindow mainScreen = new MainWindow();
+            mainScreen.Show();
 
-            // Refresh the datagrid to reflect the changes
-            Read(sender, e);
+            this.Close();
         }
     }
 }

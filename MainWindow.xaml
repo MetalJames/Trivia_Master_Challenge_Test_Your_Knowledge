@@ -5,25 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Trivia_Master_Challenge_Test_Your_Knowledge_"
         mc:Ignorable="d"
-              Title="Two Player Trivia Game" Height="450" Width="800">
+              Title="Two Player Trivia Game" Height="500" Width="800">
     <Border BorderThickness="10" BorderBrush="MidnightBlue">
         <Border BorderThickness="7" BorderBrush="LightBlue">
             <Border BorderThickness="5" BorderBrush="SkyBlue">
                 <Grid>
+                    <!-- Define the rows -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="3*"/>
+                    </Grid.RowDefinitions>
+                    
                     <!-- Background Image -->
                     <Grid.Background>
                         <ImageBrush ImageSource="images/main_screen.jpeg" Opacity="0.3" Stretch="UniformToFill"/>
                     </Grid.Background>
 
                     <!-- Admin Button -->
-                    <Button Content="Manage Questions" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" Margin="570,0,0,330" Padding="10" Click="Manage_Questions" Background="LightBlue"/>
-
+                    <Button Grid.Row="0" Content="Manage Questions" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" Margin="550,0,0,20" Padding="10" Click="Manage_Questions" Background="LightBlue"/>
 
                     <!-- Title -->
-                    <TextBlock Text="TRIVIA QUIZ GAME" Foreground="MidnightBlue" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="42" FontWeight="Bold" Margin="0,75,0,0"/>
+                    <TextBlock Grid.Row="1" Text="TRIVIA QUIZ GAME" Foreground="MidnightBlue" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="42" FontWeight="Bold" Margin="0"/>
 
                     <!-- Player Names and Multiplayer Checkbox -->
-                    <Grid Margin="0,165,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Background="Azure" Opacity="5">
+                    <Grid Grid.Row="2" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Top" Background="Azure" Opacity="5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
@@ -49,7 +55,7 @@
                     </Grid>
 
                     <!-- Start Button -->
-                    <Button Content="Start the Game" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" Margin="0,0,0,70" Padding="10" Click="Start_Click" Background="LightBlue"/>
+                    <Button Grid.Row="2" Content="Start the Game" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" Margin="0, 0, 0 70" Padding="10" Click="Start_Click" Background="LightBlue"/>
 
                 </Grid>
             </Border>
