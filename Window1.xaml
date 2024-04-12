@@ -17,8 +17,8 @@
 
                     <Grid.RowDefinitions>
                         <!-- First row takes 75% of the height -->
-                        <RowDefinition Height="3*" />
-                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="2.75*" />
+                        <RowDefinition Height="1.25*" />
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
@@ -31,10 +31,9 @@
                     <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1" Margin="10">
                         <StackPanel>
                             <TextBlock Text="Operations" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="10"/>
-                            <Button Content="Create" Margin="10" Click="Create"/>
-                            <Button Content="Read" Margin="10" Click="Read"/>
-                            <Button Content="Update" Margin="10" Click="Update"/>
-                            <Button Content="Delete" Margin="10" Click="Delete"/>
+                            <Button Content="Get Questions" Margin="10" Click="Read"/>
+                            <Button Content="Update Question" Margin="10" Click="Update"/>
+                            <Button Content="Delete Question" Margin="10" Click="Delete"/>
                         </StackPanel>
                     </Border>
 
@@ -64,7 +63,7 @@
                         <!-- Container for the "Create" button -->
                         <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1" Margin="10">
                             <!-- Place the "Create" button in this container -->
-                            <Button Content="Create" Margin="10" Click="Create"/>
+                            <Button Content="Add New Question" Margin="10" Click="Create" Height="25"/>
                         </Border>
 
                         <!-- Container for the TextField (TextBox) -->
@@ -81,26 +80,26 @@
 
                                 <!-- Headers for each field -->
                                 <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="QuestionID" Margin="5"/>
-                                    <TextBlock Text="Question" Margin="5"/>
-                                    <TextBlock Text="AnswerOne" Margin="5"/>
-                                    <TextBlock Text="AnswerTwo" Margin="5"/>
-                                    <TextBlock Text="AnswerThree" Margin="5"/>
-                                    <TextBlock Text="AnswerFour" Margin="5"/>
-                                    <TextBlock Text="Correct answer" Margin="5"/>
-                                    <TextBlock Text="DeleteQuestion" Margin="5"/>
+                                    <TextBlock Text="QuestionID" Margin="5" Width="60"/>
+                                    <TextBlock Text="Question" Margin="5" Width="200"/>
+                                    <TextBlock Text="AnswerOne" Margin="5" Width="100"/>
+                                    <TextBlock Text="AnswerTwo" Margin="5" Width="100"/>
+                                    <TextBlock Text="AnswerThree" Margin="5" Width="100"/>
+                                    <TextBlock Text="AnswerFour" Margin="5" Width="100"/>
+                                    <TextBlock Text="Correct answer" Margin="5" Width="100"/>
+                                    <TextBlock Text="DeleteQuestion" Margin="5" Width="100"/>
                                 </StackPanel>
 
                                 <!-- TextBoxes for each field -->
                                 <StackPanel Grid.Row="1" Orientation="Horizontal">
                                     <!-- TextBoxes with corresponding bindings -->
-                                    <TextBox x:Name="newQuestionIDTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="200"/>
+                                    <TextBox x:Name="newQuestionIDTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="60"/>
                                     <TextBox x:Name="newQuestionTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="200"/>
-                                    <TextBox x:Name="newAnswerOneTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="200"/>
-                                    <TextBox x:Name="newAnswerTwoTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="200"/>
-                                    <TextBox x:Name="newAnswerThreeTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="200"/>
-                                    <TextBox x:Name="newAnswerFourTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="200"/>
-                                    <TextBox x:Name="newCorrectAnswerTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="200"/>
+                                    <TextBox x:Name="newAnswerOneTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="100"/>
+                                    <TextBox x:Name="newAnswerTwoTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="100"/>
+                                    <TextBox x:Name="newAnswerThreeTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="100"/>
+                                    <TextBox x:Name="newAnswerFourTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="100"/>
+                                    <TextBox x:Name="newCorrectAnswerTextBox" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="100"/>
                                     <CheckBox x:Name="newDeleteQuestionCheckBox" Margin="5" IsEnabled="False"/>
                                 </StackPanel>
                             </Grid>
