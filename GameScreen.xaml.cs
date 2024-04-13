@@ -27,6 +27,10 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
         // Questions
         private List<Question> questions;
 
+        // Initialize players score
+        private int playerOneScore = 0;
+        private int playerTwoScore = 0;
+
         public GameScreen(string player1Name, string player2Name, List<Question> questions)
         {
             InitializeComponent();
@@ -44,64 +48,88 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             DisplayQuestions();
         }
 
-        private void Submit_Click(object sender, RoutedEventArgs e)
+        private void SubmitClickPlayerOne(object sender, RoutedEventArgs e)
         {
-            // Your submit button logic goes here
+            // Check if any radio button is checked for player 1
+            if (Player1AnswerA.IsChecked == true || Player1AnswerB.IsChecked == true ||
+                Player1AnswerC.IsChecked == true || Player1AnswerD.IsChecked == true)
+            {
+                // Determine which radio button is checked for player 1
+                RadioButton selectedRadioButton = new List<RadioButton>
+                { Player1AnswerA, Player1AnswerB, Player1AnswerC, Player1AnswerD }
+                .FirstOrDefault(rb => rb.IsChecked == true);
+
+                // Get the content of the selected radio button
+                string selectedAnswer = selectedRadioButton.Content.ToString();
+
+                // Find the current question
+                Question currentQuestion = questions.FirstOrDefault();
+
+                // Check if the selected answer matches the correct answer
+                if (selectedAnswer == currentQuestion.CorrectAnswer)
+                {
+                    // If correct, update the player's score
+                    MessageBox.Show("Correct!");
+                    playerOneScore++;
+                    Player1Score.Text = playerOneScore.ToString();
+                    // Update player 1's score (assuming you have a variable to track the score)
+                    // player1Score++;
+                    // Update the UI to reflect the new score
+                    // Player1Score.Text = player1Score.ToString();
+                }
+                else
+                {
+                    // If incorrect, provide feedback
+                    MessageBox.Show("Incorrect. Please try again.");
+                }
+
+                // Clear the checked state of all radio buttons
+                Player1AnswerA.IsChecked = false;
+                Player1AnswerB.IsChecked = false;
+                Player1AnswerC.IsChecked = false;
+                Player1AnswerD.IsChecked = false;
+
+                // Remove the current question from the list
+                questions.RemoveAt(0);
+
+                // Load the next question or end the game if there are no more questions
+                if (questions.Any())
+                {
+                    // Display the next question
+                    DisplayQuestions();
+                }
+                else
+                {
+                    // End the game (you can implement this based on your game logic)
+                    // Handle case when there are no questions available
+                    Player1Question.Text = "No questions available";
+                }
+            }
+        }
+
+        private void SubmitClickPlayerTwo(object sender, RoutedEventArgs e)
+        {
             MessageBox.Show("Test");
         }
 
         // Method to display questions in the UI
-
-
-
-
-
-
-
-
-
-
-
         private void DisplayQuestions()
         {
-            // Clear any existing questions from the UI
-            QuestionsStackPanel.Children.Clear();
-
-            // Iterate through the questions and create TextBlock elements for each question
-            foreach (var question in questions)
+            // Check if there are questions available
+            if (questions.Any())
             {
-                // Create a TextBlock for the question text
-                TextBlock questionTextBlock = new TextBlock();
-                questionTextBlock.Text = question.QuestionText;
-                questionTextBlock.FontSize = 16;
-                questionTextBlock.Margin = new Thickness(0, 10, 0, 0);
-
-                // Create TextBlocks for answer options
-                TextBlock answerOneTextBlock = new TextBlock();
-                answerOneTextBlock.Text = $"A. {question.AnswerOne}";
-                answerOneTextBlock.Margin = new Thickness(20, 5, 0, 0);
-
-                TextBlock answerTwoTextBlock = new TextBlock();
-                answerTwoTextBlock.Text = $"B. {question.AnswerTwo}";
-                answerTwoTextBlock.Margin = new Thickness(20, 5, 0, 0);
-
-                TextBlock answerThreeTextBlock = new TextBlock();
-                answerThreeTextBlock.Text = $"C. {question.AnswerThree}";
-                answerThreeTextBlock.Margin = new Thickness(20, 5, 0, 0);
-
-                TextBlock answerFourTextBlock = new TextBlock();
-                answerFourTextBlock.Text = $"D. {question.AnswerFour}";
-                answerFourTextBlock.Margin = new Thickness(20, 5, 0, 0);
-
-                // Add the question and answer TextBlocks to the StackPanel
-                QuestionsStackPanel.Children.Add(questionTextBlock);
-                QuestionsStackPanel.Children.Add(answerOneTextBlock);
-                QuestionsStackPanel.Children.Add(answerTwoTextBlock);
-                QuestionsStackPanel.Children.Add(answerThreeTextBlock);
-                QuestionsStackPanel.Children.Add(answerFourTextBlock);
+                // Set the text of the text block to the question text of the first question
+                Player1Question.Text = questions[0].QuestionText;
+                Player1AnswerA.Content = questions[0].AnswerOne;
+                Player1AnswerB.Content = questions[0].AnswerTwo;
+                Player1AnswerC.Content = questions[0].AnswerThree;
+                Player1AnswerD.Content = questions[0].AnswerFour;
+            }
+            else
+            {
+                // Handle case when there are no questions available
+                Player1Question.Text = "No questions available";
             }
         }
-
-
     }
 }
