@@ -39,7 +39,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
         {
 
             // Navigate to Window1 with player names
-            Window1 adminScreen = new Window1();
+            LoginScreen adminScreen = new LoginScreen();
             adminScreen.Show();
 
             // Close current window

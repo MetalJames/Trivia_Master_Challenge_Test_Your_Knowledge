@@ -38,9 +38,9 @@
                                 <RowDefinition Height="2*"/>
                             </Grid.RowDefinitions>
                             <TextBlock Text="Operations" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center" Margin="10" Grid.Row="0"/>
-                            <Button Content="Get Questions" Margin="10" Click="Read" VerticalAlignment="Top" Grid.Row="1" FontWeight="Bold" Background="LightBlue"/>
+                            <Button Content="Get Questions" Margin="10" Click="GetQuestions" VerticalAlignment="Top" Grid.Row="1" FontWeight="Bold" Background="LightBlue"/>
                             <Button Content="Update Question" Margin="10" Click="SelectToUpdate" VerticalAlignment="Top" Grid.Row="2" FontWeight="Bold" Background="LightBlue"/>
-                            <Button Content="Delete Question" Margin="10" Click="Delete" VerticalAlignment="Top" Grid.Row="3" FontWeight="Bold" Background="LightBlue"/>
+                            <Button Content="Delete Question" Margin="10" Click="DeleteQuestion" VerticalAlignment="Top" Grid.Row="3" FontWeight="Bold" Background="LightBlue"/>
                             <Button Content="Return to Main Screen" Margin="10" Click="ReturnToMainScreen" Grid.Row="5" VerticalAlignment="Bottom" FontWeight="Bold" Background="LightBlue"/>
                         </Grid>
                     </Border>

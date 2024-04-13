@@ -28,17 +28,42 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
 
         SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-RDHALNI;Initial Catalog=TriviaDB;Integrated Security=True;TrustServerCertificate=True");
 
-        private void Read(object sender, RoutedEventArgs e)
+        private void GetQuestions(object sender, RoutedEventArgs e)
         {
-            SqlCommand cmd = new SqlCommand("Select * from TriviaDB.dbo.Trivia_Table", con);
-            DataTable dt = new DataTable();
-            con.Open();
-            SqlDataReader sdr = cmd.ExecuteReader();
-            dt.Load(sdr);
-            con.Close();
-            datagrid.ItemsSource = dt.DefaultView;
+            try
+            {
+                // Create a new SQL command to fetch all records from the trivia table
+                SqlCommand cmd = new SqlCommand("Select * from TriviaDB.dbo.Trivia_Table", con);
 
-            datagrid.Opacity = 1;
+                // Create a DataTable to hold the fetched data
+                DataTable dt = new DataTable();
+                con.Open();
+
+                // Execute the SQL command and retrieve the data using a SqlDataReader
+                SqlDataReader sdr = cmd.ExecuteReader();
+
+                // Load the data from the SqlDataReader into the DataTable
+                dt.Load(sdr);
+                con.Close();
+
+                // Set the DataGrid's item source to the DataTable's default view
+                // This will update the DataGrid to display the fetched data
+                datagrid.ItemsSource = dt.DefaultView;
+
+                // Set the DataGrid's opacity to 1 so it will display data
+                datagrid.Opacity = 1;
+            }
+            catch (Exception ex)
+            {
+                // Close the database connection if an error occurs
+                if (con.State == ConnectionState.Open)
+                {
+                    con.Close();
+                }
+
+                // Log the exception or show a message to the user
+                MessageBox.Show($"Failed to load data. Error: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Create(object sender, RoutedEventArgs e)
@@ -75,7 +100,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
                 newCorrectAnswerTextBox.Text = "";
 
                 // Refresh the data grid
-                Read(sender, e);
+                GetQuestions(sender, e);
             }
             catch (Exception ex)
             {
@@ -170,7 +195,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
                 updateButtonContainer.SetValue(Panel.ZIndexProperty, 0);
 
                 // Refresh the datagrid to reflect the changes
-                Read(sender, e);
+                GetQuestions(sender, e);
             }
             catch (Exception ex)
             {
@@ -178,7 +203,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             }
         }
 
-        private void Delete(object sender, RoutedEventArgs e)
+        private void DeleteQuestion(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -214,7 +239,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
                 con.Close();
 
                 // Refresh the datagrid to reflect the changes
-                Read(sender, e);
+                GetQuestions(sender, e);
             }
             catch (Exception ex)
             {
