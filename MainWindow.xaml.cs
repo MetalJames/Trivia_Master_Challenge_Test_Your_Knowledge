@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Data.SqlClient;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -21,18 +22,31 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             InitializeComponent();
         }
 
+        SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-RDHALNI;Initial Catalog=TriviaDB;Integrated Security=True;TrustServerCertificate=True");
+
         private void Start_Click(object sender, RoutedEventArgs e)
         {
             // Get player names
             string player1Name = string.IsNullOrEmpty(Player1Name.Text) ? "Player One" : Player1Name.Text;
             string player2Name = string.IsNullOrEmpty(Player2Name.Text) ? "Player Two" : Player2Name.Text;
 
-            // Navigate to GameScreen with player names
-            GameScreen gameScreen = new GameScreen(player1Name, player2Name);
-            gameScreen.Show();
+            // Fetch questions from the database
+            List<Question> questions = FetchQuestionsFromDatabase();
 
-            // Close current window
-            this.Close();
+            if (questions.Count > 0)
+            {
+                // Navigate to GameScreen with player names
+                GameScreen gameScreen = new GameScreen(player1Name, player2Name, questions);
+                gameScreen.Show();
+
+                // Close current window
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("No questions found in the database. Check your connection.");
+            }
+
         }
 
         private void Manage_Questions(object sender, RoutedEventArgs e)
@@ -56,6 +70,58 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
         {
             // Disable Player 2 name textbox when Multiplayer checkbox is unchecked
             Player2Name.IsEnabled = false;
+        }
+
+        // Fetching Questions Section
+        // Class representing a single trivia question
+        public class Question
+        {
+            // Property to hold the text of the question
+            public string? QuestionText { get; set; }
+
+            // Proo hold the four possible answer options
+            public string? AnswerOne { get; set; }
+            public string? AnswerTwo { get; set; }
+            public string? AnswerThree { get; set; }
+            public string? AnswerFour { get; set; }
+
+            // Prohold the correct answer to the question
+            public string? CorrectAnswer { get; set; }
+        }
+
+        private List<Question> FetchQuestionsFromDatabase()
+        {
+            List<Question> questions = new List<Question>();
+
+            try
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("SELECT * FROM TriviaDB.dbo.Trivia_Table", con);
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Question question = new Question
+                    {
+                        QuestionText = reader["Question"].ToString()!,
+                        AnswerOne = reader["AnswerOne"].ToString()!,
+                        AnswerTwo = reader["AnswerTwo"].ToString()!,
+                        AnswerThree = reader["AnswerThree"].ToString()!,
+                        AnswerFour = reader["AnswerFour"].ToString()!,
+                        CorrectAnswer = reader["CorrectAnswer"].ToString()!,
+                    };
+                    questions.Add(question);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while fetching questions: {ex.Message}");
+            }
+            finally
+            {
+                con.Close();
+            }
+
+            return questions;
         }
     }
 }
