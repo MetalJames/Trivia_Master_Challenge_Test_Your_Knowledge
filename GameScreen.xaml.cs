@@ -57,30 +57,27 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
                 // Determine which radio button is checked for player 1
                 RadioButton selectedRadioButton = new List<RadioButton>
                 { Player1AnswerA, Player1AnswerB, Player1AnswerC, Player1AnswerD }
-                .FirstOrDefault(rb => rb.IsChecked == true);
+                .FirstOrDefault(rb => rb.IsChecked == true)!;
 
                 // Get the content of the selected radio button
-                string selectedAnswer = selectedRadioButton.Content.ToString();
+                string selectedAnswer = selectedRadioButton?.Content.ToString()!;
 
                 // Find the current question
-                Question currentQuestion = questions.FirstOrDefault();
+                Question currentQuestion = questions.FirstOrDefault()!;
 
                 // Check if the selected answer matches the correct answer
-                if (selectedAnswer == currentQuestion.CorrectAnswer)
+                if (selectedAnswer == currentQuestion?.CorrectAnswer)
                 {
-                    // If correct, update the player's score
                     MessageBox.Show("Correct!");
+                    // If correct, update the player's score
                     playerOneScore++;
-                    Player1Score.Text = playerOneScore.ToString();
-                    // Update player 1's score (assuming you have a variable to track the score)
-                    // player1Score++;
                     // Update the UI to reflect the new score
-                    // Player1Score.Text = player1Score.ToString();
+                    Player1Score.Text = playerOneScore.ToString();
                 }
                 else
                 {
                     // If incorrect, provide feedback
-                    MessageBox.Show("Incorrect. Please try again.");
+                    MessageBox.Show("Incorrect.");
                 }
 
                 // Clear the checked state of all radio buttons
@@ -100,9 +97,14 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
                 }
                 else
                 {
-                    // End the game (you can implement this based on your game logic)
+                    // End the game
                     // Handle case when there are no questions available
                     Player1Question.Text = "No questions available";
+                    Player1AnswerA.Opacity = 0;
+                    Player1AnswerB.Opacity = 0;
+                    Player1AnswerC.Opacity = 0;
+                    Player1AnswerD.Opacity = 0;
+                    SubmitPlayerOne.IsEnabled = false;
                 }
             }
         }

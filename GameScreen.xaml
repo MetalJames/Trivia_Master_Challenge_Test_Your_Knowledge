@@ -36,12 +36,12 @@
                         <StackPanel>
                             <TextBlock x:Name="Player1NameLabel" Text="Player 1" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18" Margin="0,20,0,0"/>
                             <TextBlock Text="Question:" FontWeight="Bold" Margin="10,20,10,0"/>
-                            <TextBlock x:Name="Player1Question" Margin="10,10,10,20"/>
-                            <RadioButton x:Name="Player1AnswerA" Content="Answer A" Margin="10,5"/>
-                            <RadioButton x:Name="Player1AnswerB" Content="Answer B" Margin="10,5"/>
-                            <RadioButton x:Name="Player1AnswerC" Content="Answer C" Margin="10,5"/>
-                            <RadioButton x:Name="Player1AnswerD" Content="Answer D" Margin="10,5"/>
-                            <Button Content="Submit" Click="SubmitClickPlayerOne" Margin="10,50,10,0" Background="LightBlue" FontWeight="Bold"/>
+                            <TextBlock x:Name="Player1Question" Text="Question 1" Margin="10,10,10,20"/>
+                            <RadioButton x:Name="Player1AnswerA" Content="Answer A" Margin="10,5" Opacity="1"/>
+                            <RadioButton x:Name="Player1AnswerB" Content="Answer B" Margin="10,5" Opacity="1"/>
+                            <RadioButton x:Name="Player1AnswerC" Content="Answer C" Margin="10,5" Opacity="1"/>
+                            <RadioButton x:Name="Player1AnswerD" Content="Answer D" Margin="10,5" Opacity="1"/>
+                            <Button x:Name="SubmitPlayerOne" Content="Submit" Click="SubmitClickPlayerOne" Margin="10,50,10,0" Background="LightBlue" FontWeight="Bold" IsEnabled="True"/>
                             <TextBlock x:Name="Player1Feedback" Text="" Margin="10"/>
                             <TextBlock Text="Score: " FontWeight="Bold" Margin="10,0,10,0"/>
                             <TextBlock x:Name="Player1Score" Text="0" Margin="10,0"/>
