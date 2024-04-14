@@ -27,6 +27,10 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
         // Questions
         private List<Question> questions;
 
+        // Variables to store questions for each player
+        private List<Question> playerOneQuestions;
+        private List<Question> playerTwoQuestions;
+
         // Multiplayer flag
         private bool isMultiplayer;
 
@@ -44,6 +48,25 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             this.questions = questions;
             this.isMultiplayer = isMultiplayer;
 
+            // Shuffle the list of questions
+            ShuffleQuestions(questions);
+
+
+            // Divide the shuffled questions between players
+            if (isMultiplayer)
+            {
+                // For multiplayer mode, assign half of the questions to each player
+                int halfCount = questions.Count / 2;
+                this.playerOneQuestions = questions.Take(halfCount).ToList();
+                this.playerTwoQuestions = questions.Skip(halfCount).ToList();
+            }
+            else
+            {
+                // For single player mode, assign all questions to player one
+                this.playerOneQuestions = questions;
+                this.playerTwoQuestions = new List<Question>(); // Empty list for player two
+            }
+
             // Update UI part with player names
             Player1NameLabel.Text = player1Name;
             Player2NameLabel.Text = player2Name;
@@ -53,6 +76,20 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             // Display questions in the UI
             DisplayQuestions();
             DisplayQuestionsPlayerTwo();
+        }
+
+        private void ShuffleQuestions(List<Question> questions)
+        {
+            Random rng = new Random();
+            int n = questions.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                Question value = questions[k];
+                questions[k] = questions[n];
+                questions[n] = value;
+            }
         }
 
         private void DisplayPlayers(bool isMultiplayer)
@@ -112,7 +149,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
                 string selectedAnswer = selectedRadioButton?.Content.ToString()!;
 
                 // Find the current question
-                Question currentQuestion = questions.FirstOrDefault()!;
+                Question currentQuestion = playerOneQuestions.FirstOrDefault()!;
 
                 // Check if the selected answer matches the correct answer
                 if (selectedAnswer == currentQuestion?.CorrectAnswer)
@@ -136,10 +173,10 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
                 Player1AnswerD.IsChecked = false;
 
                 // Remove the current question from the list
-                questions.RemoveAt(0);
+                playerOneQuestions.RemoveAt(0);
 
                 // Load the next question or end the game if there are no more questions
-                if (questions.Any())
+                if (playerOneQuestions.Any())
                 {
                     // Display the next question
                     DisplayQuestions();
@@ -173,7 +210,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
                 string selectedAnswer = selectedRadioButton?.Content.ToString()!;
 
                 // Find the current question
-                Question currentQuestion = questions.FirstOrDefault()!;
+                Question currentQuestion = playerTwoQuestions.FirstOrDefault()!;
 
                 // Check if the selected answer matches the correct answer
                 if (selectedAnswer == currentQuestion?.CorrectAnswer)
@@ -197,10 +234,10 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
                 Player2AnswerD.IsChecked = false;
 
                 // Remove the current question from the list
-                questions.RemoveAt(0);
+                playerTwoQuestions.RemoveAt(0);
 
                 // Load the next question or end the game if there are no more questions
-                if (questions.Any())
+                if (playerTwoQuestions.Any())
                 {
                     // Display the next question
                     DisplayQuestionsPlayerTwo();
@@ -223,14 +260,14 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
         private void DisplayQuestions()
         {
             // Check if there are questions available
-            if (questions.Any())
+            if (playerOneQuestions.Any())
             {
                 // Set the text of the text block to the question text of the first question
-                Player1Question.Text = questions[0].QuestionText;
-                Player1AnswerA.Content = questions[0].AnswerOne;
-                Player1AnswerB.Content = questions[0].AnswerTwo;
-                Player1AnswerC.Content = questions[0].AnswerThree;
-                Player1AnswerD.Content = questions[0].AnswerFour;
+                Player1Question.Text = playerOneQuestions[0].QuestionText;
+                Player1AnswerA.Content = playerOneQuestions[0].AnswerOne;
+                Player1AnswerB.Content = playerOneQuestions[0].AnswerTwo;
+                Player1AnswerC.Content = playerOneQuestions[0].AnswerThree;
+                Player1AnswerD.Content = playerOneQuestions[0].AnswerFour;
             }
             else
             {
@@ -239,22 +276,22 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             }
         }
 
-        // Method to display questions in the UI
+        // Method to display questions for player two in the UI
         private void DisplayQuestionsPlayerTwo()
         {
-            // Check if there are questions available
-            if (questions.Any())
+            // Check if there are questions available for player two
+            if (playerTwoQuestions.Any())
             {
                 // Set the text of the text block to the question text of the first question
-                Player2Question.Text = questions[0].QuestionText;
-                Player2AnswerA.Content = questions[0].AnswerOne;
-                Player2AnswerB.Content = questions[0].AnswerTwo;
-                Player2AnswerC.Content = questions[0].AnswerThree;
-                Player2AnswerD.Content = questions[0].AnswerFour;
+                Player2Question.Text = playerTwoQuestions[0].QuestionText;
+                Player2AnswerA.Content = playerTwoQuestions[0].AnswerOne;
+                Player2AnswerB.Content = playerTwoQuestions[0].AnswerTwo;
+                Player2AnswerC.Content = playerTwoQuestions[0].AnswerThree;
+                Player2AnswerD.Content = playerTwoQuestions[0].AnswerFour;
             }
             else
             {
-                // Handle case when there are no questions available
+                // Handle case when there are no questions available for player two
                 Player2Question.Text = "No questions available";
             }
         }
