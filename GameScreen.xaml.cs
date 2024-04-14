@@ -240,6 +240,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
                 else
                 {
                     // End the game
+
                     // After processing the answer, check if the game has ended
                     CheckForEndOfGame();
                 }
@@ -290,7 +291,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             if (!playerOneQuestions.Any() && !playerTwoQuestions.Any())
             {
                 // Open the winner screen with the calculated winner and scores
-                WinnerScreen winnerScreen = new WinnerScreen(playerOneName, playerTwoName, playerOneScore, playerTwoScore);
+                WinnerScreen winnerScreen = new WinnerScreen(playerOneName, playerTwoName, playerOneScore, playerTwoScore, questions, isMultiplayer);
                 winnerScreen.Show();
 
                 // Close the current game window after showing the winner screen

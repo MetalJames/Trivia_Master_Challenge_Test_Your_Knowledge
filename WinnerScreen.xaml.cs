@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static Trivia_Master_Challenge_Test_Your_Knowledge_.MainWindow;
 
 namespace Trivia_Master_Challenge_Test_Your_Knowledge_
 {
@@ -19,7 +20,12 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
     /// </summary>
     public partial class WinnerScreen : Window
     {
-        public WinnerScreen(string playerOneName, string playerTwoName, int player1Score, int player2Score)
+        private string player1Name;
+        private string player2Name;
+        private List<Question> questions;
+        private bool isMultiplayer;
+
+        public WinnerScreen(string playerOneName, string playerTwoName, int player1Score, int player2Score, List<Question> questions, bool isMultiplayer)
         {
             InitializeComponent();
             Player1ScoreText.Text = $"{playerOneName} Score: {player1Score}";
@@ -32,11 +38,23 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
                 winnerName = "It's a tie!";
             }
             WinnerTextBlock.Text = $"Winner: {winnerName}";
+
+            // Store the player names, questions, and multiplayer flag
+            this.player1Name = playerOneName;
+            this.player2Name = playerTwoName;
+            this.questions = questions;
+            this.isMultiplayer = isMultiplayer;
         }
 
-        public void PlayAgain (object sender, RoutedEventArgs e)
+        // Play Again button click event handler
+        public void PlayAgain(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Test");
+            // Perform actions to reset the game or navigate back to the game screen
+            // For example:
+            GameScreen gameScreen = new GameScreen(player1Name, player2Name, questions, isMultiplayer);
+            gameScreen.Show();
+            // Close the current WinnerScreen
+            this.Close();
         }
 
         private void ReturnToMainScreen(object sender, RoutedEventArgs e)
