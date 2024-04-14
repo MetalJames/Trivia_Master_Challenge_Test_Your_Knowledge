@@ -78,6 +78,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             DisplayQuestionsPlayerTwo();
         }
 
+        // Shuffle the list of questions
         private void ShuffleQuestions(List<Question> questions)
         {
             Random rng = new Random();
