@@ -134,7 +134,6 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             }
         }
 
-
         private void SubmitClickPlayerOne(object sender, RoutedEventArgs e)
         {
             // Check if any radio button is checked for player 1
@@ -185,13 +184,8 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
                 else
                 {
                     // End the game
-                    // Handle case when there are no questions available
-                    Player1Question.Text = "No questions available";
-                    Player1AnswerA.Opacity = 0;
-                    Player1AnswerB.Opacity = 0;
-                    Player1AnswerC.Opacity = 0;
-                    Player1AnswerD.Opacity = 0;
-                    SubmitPlayerOne.IsEnabled = false;
+                    // After processing the answer, check if the game has ended
+                    CheckForEndOfGame();
                 }
             }
         }
@@ -246,13 +240,8 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
                 else
                 {
                     // End the game
-                    // Handle case when there are no questions available
-                    Player2Question.Text = "No questions available";
-                    Player2AnswerA.Opacity = 0;
-                    Player2AnswerB.Opacity = 0;
-                    Player2AnswerC.Opacity = 0;
-                    Player2AnswerD.Opacity = 0;
-                    SubmitPlayerTwo.IsEnabled = false;
+                    // After processing the answer, check if the game has ended
+                    CheckForEndOfGame();
                 }
             }
         }
@@ -294,6 +283,18 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             {
                 // Handle case when there are no questions available for player two
                 Player2Question.Text = "No questions available";
+            }
+        }
+        private void CheckForEndOfGame()
+        {
+            if (!playerOneQuestions.Any() && !playerTwoQuestions.Any())
+            {
+                // Open the winner screen with the calculated winner and scores
+                WinnerScreen winnerScreen = new WinnerScreen(playerOneName, playerTwoName, playerOneScore, playerTwoScore);
+                winnerScreen.Show();
+
+                // Close the current game window after showing the winner screen
+                this.Close();
             }
         }
     }

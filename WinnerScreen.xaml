@@ -14,27 +14,43 @@
                     <Grid.Background>
                         <ImageBrush ImageSource="images/winner_screen.jpeg" Opacity="0.3" Stretch="UniformToFill" Viewbox="0,0,1,0.8"/>
                     </Grid.Background>
+                    
                     <!-- Title -->
                     <TextBlock Text="TRIVIA QUIZ GAME" Foreground="MidnightBlue" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" Margin="0,15,0,0"/>
 
-                    <!-- Scores -->
-                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,300,0,0">
-                        <TextBlock Text="Scores:" FontSize="20" FontWeight="Bold" Margin="0,10,0,0"/>
-                        <TextBlock x:Name="Player1ScoreText" FontSize="16" Margin="0,10,0,0"/>
-                        <TextBlock x:Name="Player2ScoreText" FontSize="16" Margin="0,10,0,0"/>
-                    </StackPanel>
-
                     <!-- Winner Announcement -->
-                    <TextBlock Text="Winner: Player 1" Foreground="MidnightBlue" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontWeight="Bold" Margin="20,0,0,220"/>
+                    <TextBlock x:Name="WinnerTextBlock" Text="Winner: Player 1" Foreground="MidnightBlue" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="36" FontWeight="Bold" Margin="20,0,0,220"/>
 
                     <!-- Congratulation -->
                     <TextBlock Text="CONGRATULATION!" Foreground="MidnightBlue" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="42" FontWeight="Bold" Margin="20,50,0,0" Opacity="0.2"/>
 
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,80">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Scores -->
+                        <TextBlock Text="Scores:" FontSize="22" FontWeight="Bold" Margin="0" Grid.Row="0" Grid.Column="1"/>
+
+                        <!-- Player 1 Score -->
+                        <TextBlock x:Name="Player1ScoreText" Text="Player 1" FontSize="16" FontWeight="Bold" Margin="0,0,100,0" Grid.Row="1" Grid.Column="0"/>
+
+                        <!-- Player 2 Score -->
+                        <TextBlock x:Name="Player2ScoreText" Text="Player 2" FontSize="16" FontWeight="Bold" Margin="100,0,0,0" Grid.Row="1" Grid.Column="2"/>
+                    </Grid>
+
                     <!-- Buttons -->
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10,0,0,0">
-                        <Button Content="Play Again" Width="150" Margin="0,10,100,10" Padding="10" Click="PlayAgain_Click" Background="LightBlue" FontWeight="Bold"/>
-                        <Button Content="Return to Main Screen" Width="150" Margin="100,10,0,10" Padding="10" Click="ReturnToMain_Click" Background="LightBlue" FontWeight="Bold"/>
+                        <Button Content="Play Again" Width="150" Margin="0,10,100,10" Padding="10" Click="PlayAgain" Background="LightBlue" FontWeight="Bold"/>
+                        <Button Content="Return to Main Screen" Width="150" Margin="100,10,0,10" Padding="10" Click="ReturnToMainScreen" Background="LightBlue" FontWeight="Bold"/>
                     </StackPanel>
+
                 </Grid>
             </Border>
         </Border>
