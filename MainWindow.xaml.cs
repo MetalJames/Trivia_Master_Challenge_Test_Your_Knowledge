@@ -30,13 +30,16 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             string player1Name = string.IsNullOrEmpty(Player1Name.Text) ? "Player One" : Player1Name.Text;
             string player2Name = string.IsNullOrEmpty(Player2Name.Text) ? "Player Two" : Player2Name.Text;
 
+            // Determine if multiplayer is selected
+            bool isMultiplayer = MultiplayerCheckBox.IsChecked == true;
+
             // Fetch questions from the database
             List<Question> questions = FetchQuestionsFromDatabase();
 
             if (questions.Count > 0)
             {
                 // Navigate to GameScreen with player names
-                GameScreen gameScreen = new GameScreen(player1Name, player2Name, questions);
+                GameScreen gameScreen = new GameScreen(player1Name, player2Name, questions, isMultiplayer);
                 gameScreen.Show();
 
                 // Close current window

@@ -9,7 +9,7 @@
     <Border BorderThickness="10" BorderBrush="MidnightBlue">
         <Border BorderThickness="7" BorderBrush="LightBlue">
             <Border BorderThickness="5" BorderBrush="SkyBlue">
-                <Grid>
+                <Grid  x:Name="GridChangeForOnePlayer">
                     <!-- Background Image -->
                     <Grid.Background>
                         <ImageBrush ImageSource="images/game_screen.jpeg" Opacity="0.1" Stretch="UniformToFill" Viewbox="0,0.1,1,1"/>
@@ -22,7 +22,7 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Player 1 Section -->
-                    <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1" Margin="10">
+                    <Border x:Name="PlayerOneGrid" Grid.Column="0" BorderBrush="Black" BorderThickness="1" Margin="10">
                         <Border.Background>
                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" Opacity="0.5">
                                 <GradientStop Offset="1" Color="#FFDAB9"/>
@@ -49,10 +49,10 @@
                     </Border>
 
                     <!-- Middle Separator -->
-                    <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1"/>
+                    <Border x:Name="MiddleSeparator" Grid.Column="1" BorderBrush="Black" BorderThickness="1"/>
 
                     <!-- Player 2 Section -->
-                    <Border Grid.Column="2" BorderBrush="Black" BorderThickness="1" Margin="10">
+                    <Border x:Name="PlayerTwoGrid" Grid.Column="2" BorderBrush="Black" BorderThickness="1" Margin="10">
                         <Border.Background>
                             <LinearGradientBrush StartPoint="1,0" EndPoint="0,1" Opacity="0.5">
                                 <GradientStop Offset="1" Color="#FFDAB9"/>
@@ -71,7 +71,7 @@
                             <RadioButton x:Name="Player2AnswerB" Content="Answer B" Margin="10,5"/>
                             <RadioButton x:Name="Player2AnswerC" Content="Answer C" Margin="10,5"/>
                             <RadioButton x:Name="Player2AnswerD" Content="Answer D" Margin="10,5"/>
-                            <Button Content="Submit" Click="SubmitClickPlayerTwo" Margin="10,50,10,0" Background="LightBlue" FontWeight="Bold"/>
+                            <Button x:Name="SubmitPlayerTwo" Content="Submit" Click="SubmitClickPlayerTwo" Margin="10,50,10,0" Background="LightBlue" FontWeight="Bold" IsEnabled="True"/>
                             <TextBlock x:Name="Player2Feedback" Text="" Margin="10"/>
                             <TextBlock Text="Score: " FontWeight="Bold" Margin="10,0,10,0"/>
                             <TextBlock x:Name="Player2Score" Text="0" Margin="10,0"/>
