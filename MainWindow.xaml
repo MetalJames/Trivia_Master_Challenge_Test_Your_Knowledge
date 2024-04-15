@@ -54,6 +54,12 @@
                         </StackPanel>
                     </Grid>
 
+                    <!-- Drop-down menu for selecting the number of questions -->
+                    <ComboBox Grid.Row="2" x:Name="QuestionCountComboBox" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0, 0, 0, 50" Width="120" SelectedIndex="0">
+                        <ComboBoxItem Content="5 Questions"/>
+                        <ComboBoxItem Content="10 Questions"/>
+                    </ComboBox>
+
                     <!-- Start Button -->
                     <Button Grid.Row="2" Content="Start the Game" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold" Margin="0, 0, 0 70" Padding="10" Click="Start_Click" Background="LightBlue"/>
 

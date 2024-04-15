@@ -39,7 +39,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             if (questions.Count > 0)
             {
                 // Navigate to GameScreen with player names
-                GameScreen gameScreen = new GameScreen(player1Name, player2Name, questions, isMultiplayer);
+                GameScreen gameScreen = new GameScreen(player1Name, player2Name, questions, isMultiplayer, 10);
                 gameScreen.Show();
 
                 // Close current window

@@ -52,7 +52,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
         public void PlayAgain(object sender, RoutedEventArgs e)
         {
             // Perform actions to reset the game or navigate back to the game screen
-            GameScreen gameScreen = new GameScreen(player1Name, player2Name, questions, isMultiplayer);
+            GameScreen gameScreen = new GameScreen(player1Name, player2Name, questions, isMultiplayer, 10);
             gameScreen.Show();
             // Close the current WinnerScreen
             this.Close();

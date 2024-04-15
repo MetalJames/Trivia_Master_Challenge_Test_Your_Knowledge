@@ -38,7 +38,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
         private int playerOneScore = 0;
         private int playerTwoScore = 0;
 
-        public GameScreen(string player1Name, string player2Name, List<Question> questions, bool isMultiplayer)
+        public GameScreen(string player1Name, string player2Name, List<Question> questions, bool isMultiplayer, int questionLimit)
         {
             InitializeComponent();
 
@@ -51,20 +51,28 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             // Shuffle the list of questions
             ShuffleQuestions(questions);
 
-
-            // Divide the shuffled questions between players
-            if (isMultiplayer)
+            // Limit the number of questions for single-player mode
+            if (!isMultiplayer && questionLimit > 0)
             {
-                // For multiplayer mode, assign half of the questions to each player
-                int halfCount = questions.Count / 2;
-                this.playerOneQuestions = questions.Take(halfCount).ToList();
-                this.playerTwoQuestions = questions.Skip(halfCount).ToList();
+                this.playerOneQuestions = questions.Take(questionLimit).ToList();
+                this.playerTwoQuestions = new List<Question>(); // Empty list for player two
             }
             else
             {
-                // For single player mode, assign all questions to player one
-                this.playerOneQuestions = questions;
-                this.playerTwoQuestions = new List<Question>(); // Empty list for player two
+                // Divide the shuffled questions between players
+                if (isMultiplayer)
+                {
+                    // For multiplayer mode, assign half of the questions to each player
+                    int halfCount = questions.Count / 2;
+                    this.playerOneQuestions = questions.Take(halfCount).ToList();
+                    this.playerTwoQuestions = questions.Skip(halfCount).ToList();
+                }
+                else
+                {
+                    // For single player mode, assign all questions to player one
+                    this.playerOneQuestions = questions;
+                    this.playerTwoQuestions = new List<Question>(); // Empty list for player two
+                }
             }
 
             // Update UI part with player names
