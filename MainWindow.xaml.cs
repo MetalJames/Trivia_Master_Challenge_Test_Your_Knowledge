@@ -33,23 +33,41 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             // Determine if multiplayer is selected
             bool isMultiplayer = MultiplayerCheckBox.IsChecked == true;
 
-            // Fetch questions from the database
-            List<Question> questions = FetchQuestionsFromDatabase();
-
-            if (questions.Count > 0)
+            // Check if an item is selected
+            if (QuestionCountComboBox.SelectedItem != null)
             {
-                // Navigate to GameScreen with player names
-                GameScreen gameScreen = new GameScreen(player1Name, player2Name, questions, isMultiplayer, 10);
-                gameScreen.Show();
+                // Get the content of the selected item
+                string selectedContent = ((ComboBoxItem)QuestionCountComboBox.SelectedItem).Content.ToString()!;
 
-                // Close current window
-                this.Close();
+                // Try to parse the selected content to extract the number of questions
+                int selectedQuestionCount;
+                if (int.TryParse(selectedContent.Split(' ')[0], out selectedQuestionCount))
+                {
+                    // Now you have the selected number of questions in selectedQuestionCount
+
+                    // Fetch questions from the database
+                    List<Question> questions = FetchQuestionsFromDatabase();
+
+                    if (questions.Count > 0)
+                    {
+                        // Navigate to GameScreen with player names
+                        GameScreen gameScreen = new GameScreen(player1Name, player2Name, questions, isMultiplayer, selectedQuestionCount);
+                        gameScreen.Show();
+
+                        // Close current window
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Error: Failed to parse selected question count.");
+                }
             }
             else
             {
-                MessageBox.Show("No questions found in the database. Check your connection.");
+                // Handle case when no item is selected
+                MessageBox.Show("Please select the number of questions.");
             }
-
         }
 
         private void Manage_Questions(object sender, RoutedEventArgs e)

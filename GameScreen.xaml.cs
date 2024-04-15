@@ -38,6 +38,9 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
         private int playerOneScore = 0;
         private int playerTwoScore = 0;
 
+        // Add selectedQuestionCount as a member field
+        private int selectedQuestionCount;
+
         public GameScreen(string player1Name, string player2Name, List<Question> questions, bool isMultiplayer, int questionLimit)
         {
             InitializeComponent();
@@ -47,6 +50,9 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             this.playerTwoName = player2Name;
             this.questions = questions;
             this.isMultiplayer = isMultiplayer;
+
+            // Assign the value to selectedQuestionCount
+            this.selectedQuestionCount = questionLimit;
 
             // Shuffle the list of questions
             ShuffleQuestions(questions);
@@ -59,19 +65,23 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             }
             else
             {
-                // Divide the shuffled questions between players
-                if (isMultiplayer)
+                // Calculate the number of questions each player should get
+                int questionsPerPlayer = Math.Min(questions.Count / 2, questionLimit);
+
+                // Distribute questions to each player
+                this.playerOneQuestions = questions.Take(questionsPerPlayer).ToList();
+                this.playerTwoQuestions = questions.Skip(questionsPerPlayer).Take(questionsPerPlayer).ToList();
+
+
+                // Limit each player to a maximum of 10 questions
+                if (this.playerOneQuestions.Count > 10)
                 {
-                    // For multiplayer mode, assign half of the questions to each player
-                    int halfCount = questions.Count / 2;
-                    this.playerOneQuestions = questions.Take(halfCount).ToList();
-                    this.playerTwoQuestions = questions.Skip(halfCount).ToList();
+                    this.playerOneQuestions = this.playerOneQuestions.Take(10).ToList();
                 }
-                else
+
+                if (this.playerTwoQuestions.Count > 10)
                 {
-                    // For single player mode, assign all questions to player one
-                    this.playerOneQuestions = questions;
-                    this.playerTwoQuestions = new List<Question>(); // Empty list for player two
+                    this.playerTwoQuestions = this.playerTwoQuestions.Take(10).ToList();
                 }
             }
 
@@ -312,7 +322,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             if (!playerOneQuestions.Any() && !playerTwoQuestions.Any())
             {
                 // Open the winner screen with the calculated winner and scores
-                WinnerScreen winnerScreen = new WinnerScreen(playerOneName, playerTwoName, playerOneScore, playerTwoScore, questions, isMultiplayer);
+                WinnerScreen winnerScreen = new WinnerScreen(playerOneName, playerTwoName, playerOneScore, playerTwoScore, questions, isMultiplayer, selectedQuestionCount);
                 winnerScreen.Show();
 
                 // Close the current game window after showing the winner screen

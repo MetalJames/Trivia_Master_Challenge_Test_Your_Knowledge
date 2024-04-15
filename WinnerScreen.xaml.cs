@@ -24,8 +24,9 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
         private string player2Name;
         private List<Question> questions;
         private bool isMultiplayer;
+        private int selectedQuestionCount;
 
-        public WinnerScreen(string playerOneName, string playerTwoName, int player1Score, int player2Score, List<Question> questions, bool isMultiplayer)
+        public WinnerScreen(string playerOneName, string playerTwoName, int player1Score, int player2Score, List<Question> questions, bool isMultiplayer, int selectedQuestionCount)
         {
             InitializeComponent();
             Player1ScoreText.Text = $"{playerOneName}:";
@@ -46,13 +47,14 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             this.player2Name = playerTwoName;
             this.questions = questions;
             this.isMultiplayer = isMultiplayer;
+            this.selectedQuestionCount = selectedQuestionCount;
         }
 
         // Play Again button click event handler
         public void PlayAgain(object sender, RoutedEventArgs e)
         {
             // Perform actions to reset the game or navigate back to the game screen
-            GameScreen gameScreen = new GameScreen(player1Name, player2Name, questions, isMultiplayer, 10);
+            GameScreen gameScreen = new GameScreen(player1Name, player2Name, questions, isMultiplayer, selectedQuestionCount);
             gameScreen.Show();
             // Close the current WinnerScreen
             this.Close();
