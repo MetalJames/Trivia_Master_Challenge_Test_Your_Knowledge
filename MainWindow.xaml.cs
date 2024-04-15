@@ -55,7 +55,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
         private void Manage_Questions(object sender, RoutedEventArgs e)
         {
 
-            // Navigate to Window1 with player names
+            // Navigate to Login Screen with player names
             LoginScreen adminScreen = new LoginScreen();
             adminScreen.Show();
 

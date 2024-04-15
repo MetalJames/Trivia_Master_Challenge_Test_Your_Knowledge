@@ -17,11 +17,11 @@ using System.Windows.Shapes;
 namespace Trivia_Master_Challenge_Test_Your_Knowledge_
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for AdminScreen.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class AdminScreen : Window
     {
-        public Window1()
+        public AdminScreen()
         {
             InitializeComponent();
         }
