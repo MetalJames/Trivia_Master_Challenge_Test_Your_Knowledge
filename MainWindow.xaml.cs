@@ -55,7 +55,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
         private void Manage_Questions(object sender, RoutedEventArgs e)
         {
 
-            // Navigate to Login Screen with player names
+            // Navigate to Login Screen
             LoginScreen adminScreen = new LoginScreen();
             adminScreen.Show();
 
@@ -92,6 +92,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             public string? CorrectAnswer { get; set; }
         }
 
+        // Creating List with questions
         private List<Question> FetchQuestionsFromDatabase()
         {
             List<Question> questions = new List<Question>();

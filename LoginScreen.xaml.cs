@@ -35,7 +35,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
 
             if (inputLogin == expectedLogin && inputPassword == expectedPassword && isHuman)
             {
-                // Navigate to MainScreen with player names
+                // Navigate to AdminScreen to manage the questions
                 AdminScreen manageQuestionsScreen = new AdminScreen();
                 manageQuestionsScreen.Show();
 
@@ -56,7 +56,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
 
         private void HomeClick(object sender, RoutedEventArgs e)
         {
-            // Navigate to MainScreen with player names
+            // Navigate to MainScreen
             MainWindow mainScreen = new MainWindow();
             mainScreen.Show();
 

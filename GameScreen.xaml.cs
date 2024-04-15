@@ -74,7 +74,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             DisplayPlayers(isMultiplayer);
 
             // Display questions in the UI
-            DisplayQuestions();
+            DisplayQuestionsPlayerOne();
             DisplayQuestionsPlayerTwo();
         }
 
@@ -179,7 +179,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
                 if (playerOneQuestions.Any())
                 {
                     // Display the next question
-                    DisplayQuestions();
+                    DisplayQuestionsPlayerOne();
                 }
                 else
                 {
@@ -199,11 +199,11 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
 
         private void SubmitClickPlayerTwo(object sender, RoutedEventArgs e)
         {
-            // Check if any radio button is checked for player 1
+            // Check if any radio button is checked for player 2
             if (Player2AnswerA.IsChecked == true || Player2AnswerB.IsChecked == true ||
                 Player2AnswerC.IsChecked == true || Player2AnswerD.IsChecked == true)
             {
-                // Determine which radio button is checked for player 1
+                // Determine which radio button is checked for player 2
                 RadioButton selectedRadioButton = new List<RadioButton>
                 { Player2AnswerA, Player2AnswerB, Player2AnswerC, Player2AnswerD }
                 .FirstOrDefault(rb => rb.IsChecked == true)!;
@@ -261,7 +261,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
         }
 
         // Method to display questions in the UI
-        private void DisplayQuestions()
+        private void DisplayQuestionsPlayerOne()
         {
             // Check if there are questions available
             if (playerOneQuestions.Any())
