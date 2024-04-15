@@ -28,8 +28,10 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
         public WinnerScreen(string playerOneName, string playerTwoName, int player1Score, int player2Score, List<Question> questions, bool isMultiplayer)
         {
             InitializeComponent();
-            Player1ScoreText.Text = $"{playerOneName} Score: {player1Score}";
-            Player2ScoreText.Text = $"{playerTwoName} Score: {player2Score}";
+            Player1ScoreText.Text = $"{playerOneName}:";
+            Player2ScoreText.Text = $"{playerTwoName}:";
+            Player1Score.Text = $"{player1Score}";
+            Player2Score.Text = $"{player2Score}";
 
             // Determine the winner based on scores
             string winnerName = player1Score > player2Score ? playerOneName : playerTwoName;

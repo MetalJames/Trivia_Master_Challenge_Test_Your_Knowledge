@@ -24,31 +24,34 @@
                     <!-- Congratulation -->
                     <TextBlock Text="CONGRATULATION!" Foreground="MidnightBlue" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="42" FontWeight="Bold" Margin="20,50,0,0" Opacity="0.2"/>
 
-                    <Grid HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,80">
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,65">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="3*"/>
                         </Grid.ColumnDefinitions>
 
                         <!-- Scores -->
-                        <TextBlock Text="Scores:" FontSize="22" FontWeight="Bold" Margin="0" Grid.Row="0" Grid.Column="1"/>
+                        <TextBlock Text="Scores:" FontSize="22" FontWeight="Bold" Margin="10, 0, 0, 0" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center"/>
 
                         <!-- Player 1 Score -->
                         <TextBlock x:Name="Player1ScoreText" Text="Player 1" FontSize="16" FontWeight="Bold" Margin="0,0,100,0" Grid.Row="1" Grid.Column="0"/>
+                        <TextBlock x:Name="Player1Score" Text="0" FontSize="16" FontWeight="Bold" Margin="0,25,100,0" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"/>
 
                         <!-- Player 2 Score -->
                         <TextBlock x:Name="Player2ScoreText" Text="Player 2" FontSize="16" FontWeight="Bold" Margin="100,0,0,0" Grid.Row="1" Grid.Column="2"/>
+                        <TextBlock x:Name="Player2Score" Text="0" FontSize="16" FontWeight="Bold" Margin="100,25,0,0" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center"/>
+
                     </Grid>
 
                     <!-- Buttons -->
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10,0,0,0">
-                        <Button Content="Play Again" Width="150" Margin="0,10,100,10" Padding="10" Click="PlayAgain" Background="LightBlue" FontWeight="Bold"/>
-                        <Button Content="Return to Main Screen" Width="150" Margin="100,10,0,10" Padding="10" Click="ReturnToMainScreen" Background="LightBlue" FontWeight="Bold"/>
+                        <Button Content="Play Again" Width="150" Margin="5,10,100,15" Padding="10" Click="PlayAgain" Background="LightBlue" FontWeight="Bold"/>
+                        <Button Content="Return to Main Screen" Width="150" Margin="100,10,5,15" Padding="10" Click="ReturnToMainScreen" Background="LightBlue" FontWeight="Bold"/>
                     </StackPanel>
 
                 </Grid>

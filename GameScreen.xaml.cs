@@ -184,6 +184,13 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
                 else
                 {
                     // End the game
+                    // Handle case when there are no questions available
+                    Player1Question.Text = "No questions available";
+                    Player1AnswerA.Opacity = 0;
+                    Player1AnswerB.Opacity = 0;
+                    Player1AnswerC.Opacity = 0;
+                    Player1AnswerD.Opacity = 0;
+                    SubmitPlayerOne.IsEnabled = false;
                     // After processing the answer, check if the game has ended
                     CheckForEndOfGame();
                 }
@@ -240,7 +247,13 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
                 else
                 {
                     // End the game
-
+                    // Handle case when there are no questions available
+                    Player2Question.Text = "No questions available";
+                    Player2AnswerA.Opacity = 0;
+                    Player2AnswerB.Opacity = 0;
+                    Player2AnswerC.Opacity = 0;
+                    Player2AnswerD.Opacity = 0;
+                    SubmitPlayerTwo.IsEnabled = false;
                     // After processing the answer, check if the game has ended
                     CheckForEndOfGame();
                 }
