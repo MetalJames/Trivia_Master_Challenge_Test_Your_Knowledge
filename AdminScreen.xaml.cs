@@ -70,8 +70,14 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
         {
             try
             {
+                // Generate a new unique QuestionID
+                // I decide to to change it to unique auto ID so there will be no errors
+                int questionID = GenerateUniqueQuestionID();
+
+                // Old method that uses user input, feel free to modify my code
+                //int questionID = int.Parse(newQuestionIDTextBox.Text);
+
                 // Get input values from text boxes
-                int questionID = int.Parse(newQuestionIDTextBox.Text);
                 string question = newQuestionTextBox.Text;
                 string answerOne = newAnswerOneTextBox.Text;
                 string answerTwo = newAnswerTwoTextBox.Text;
@@ -91,7 +97,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
                 con.Close();
 
                 // Reset the text fields
-                newQuestionIDTextBox.Text = "";
+                //newQuestionIDTextBox.Text = ""; <- No longer need this field, feel free to modify my code
                 newQuestionTextBox.Text = "";
                 newAnswerOneTextBox.Text = "";
                 newAnswerTwoTextBox.Text = "";
@@ -106,6 +112,25 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
             {
                 MessageBox.Show($"An error occurred: {ex.Message}");
             }
+        }
+
+        // Helper functions to create Unique ID
+        // Generate a unique QuestionID using querying the database for the maximum existing ID and adding 1,
+        private int GenerateUniqueQuestionID()
+        {
+            int newQuestionID = GetMaxQuestionID() + 1;
+            return newQuestionID;
+        }
+
+        // Query the database to get the maximum existing QuestionID
+        private int GetMaxQuestionID()
+        {
+            string query = "SELECT MAX(QuestionID) FROM TriviaDB.dbo.Trivia_Table";
+            SqlCommand cmd = new SqlCommand(query, con);
+            con.Open();
+            int maxID = (int)cmd.ExecuteScalar();
+            con.Close();
+            return maxID;
         }
 
         private void SelectToUpdate(object sender, RoutedEventArgs e)
@@ -125,7 +150,7 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
                 newAnswerFourTextBox.Text = selectedQuestion["AnswerFour"].ToString();
                 newCorrectAnswerTextBox.Text = selectedQuestion["CorrectAnswer"].ToString();
 
-                newQuestionIDTextBox.IsEnabled = false;
+                //newQuestionIDTextBox.IsEnabled = false; <- No longer need to disable it as now ID adds automatically, feel fre to change anything you like :)
 
                 // Disable and hide the "Add New Question" button
                 createButton.IsEnabled = false;
@@ -182,7 +207,8 @@ namespace Trivia_Master_Challenge_Test_Your_Knowledge_
                 newAnswerFourTextBox.Text = "";
                 newCorrectAnswerTextBox.Text = "";
 
-                newQuestionIDTextBox.IsEnabled = true;
+                //newQuestionIDTextBox.IsEnabled = true; <- No longer need to disable it as now ID adds automatically, feel fre to change anything you like :)
+                newQuestionIDTextBox.Text = "Auto Generated";
 
                 // Disable and hide the "Add New Question" button
                 createButton.IsEnabled = true;
